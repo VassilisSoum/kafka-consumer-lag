@@ -1,4 +1,5 @@
-/*package com.bill.example
+/*
+package com.bill.example
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 import org.apache.kafka.common.serialization.StringSerializer
@@ -34,4 +35,5 @@ object KafkaMessageProducer extends App {
 
     Thread.sleep(1000)
   }
-}*/
+}
+*/

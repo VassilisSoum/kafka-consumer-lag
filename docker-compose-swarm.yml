@@ -1,27 +1,28 @@
 version: '3.7'
+
 services:
   example-app:
     image: billsoum/example-app:latest
-    restart: on-failure
-    depends_on:
-      - kafka
-    ports:
-      - "8080:8080"
-    environment:
-      BOOTSTRAP_SERVER: kafka:9092
     deploy:
-      mode: replicated
       replicas: 1
       restart_policy:
         condition: on-failure
+    environment:
+      BOOTSTRAP_SERVER: "kafka:9092"
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://localhost:8080/health || exit 1" ]
+      test: [ "CMD-SHELL", "curl -f http://localhost:9999/health || exit 1" ]
       interval: 30s
       timeout: 10s
       retries: 3
+    ports:
+      - "9999:9999"
+    expose:
+      - 9999
+    depends_on:
+      - kafka
     networks:
-      - kafka_example_network
+      - kafka_net
 
 networks:
-  kafka_example_network:
+  kafka_net:
     external: true
